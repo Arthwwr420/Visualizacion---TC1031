@@ -1,3 +1,9 @@
+/*
+*  autor: Arturo Balboa Alvarado
+*  fecha: Sept 2024
+*  Visualizador de algoritmos
+*/
+
 #include<iostream>
 #include<SDL2/SDL.h>
 #include<thread>
