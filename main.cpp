@@ -9,7 +9,7 @@
 #include<thread>
 #include"sorts.h"
 #include<algorithm>
-
+#include"bst.h"
 
 const int WIDTH = 1200, HEIGHT = 675;
 
@@ -44,15 +44,18 @@ int main(int argc, char* argv[]){
             chosenone = 5;
             maxelements = 10;
         }
+        else if(ar1 == "bst" || ar1 == "6"){
+            chosenone = 6;
+        }
         else{
             std::cout << 
             "Entrada no valida, el formato para la ejecucion es \" main + algoritmo + numero de elementos \" \n \
-Los algoritmos son:  (0) Bubble , (1) Shell, (2) Insertion, (3) Selection, (4) Merge, (5) Bogo \n";
+Los algoritmos son:  (0) Bubble , (1) Shell, (2) Insertion, (3) Selection, (4) Merge, (5) Bogo, (6) BST \n";
             exit(1);
         }
     }
 
-    if (argv[2] !=  NULL){
+    if (argv[2] !=  NULL && chosenone != 6){
         std::string alg;
         switch (chosenone)
         {
@@ -97,6 +100,8 @@ El numero maximo de elementos para " << alg << " es " << maxelements << "\n";
 
     //Create Array
     int array[arrsize];
+    int BSTarray[] = {32, 16, 48, 8, 24, 40, 56, 4, 12, 20, 28, 36, 44, 52, 60, 2, 6, 10, 14, 18, 22, 26, 30, 34, 38, 42, 46, 50, 54, 58, 62, 
+                1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 33, 35, 37, 39, 41, 43, 45, 47, 49, 51, 53, 55, 57, 59, 61, 63};
     newOrderArray(array, arrsize);
     shuffle(array, arrsize);
 
@@ -149,10 +154,16 @@ El numero maximo de elementos para " << alg << " es " << maxelements << "\n";
     case 5: 
         running = BogoSort(array, arrsize, HEIGHT, WIDTH, renderer);
         break;
+    case 6:
+        running = orderBST(renderer);
     default:
         break;
     }
 
+    
+
+
+    SDL_RenderPresent(renderer);
     //end screen
     while(true){
         if (!running) break;
@@ -175,5 +186,4 @@ El numero maximo de elementos para " << alg << " es " << maxelements << "\n";
 
     return EXIT_SUCCESS;
     
-    return 0;
 }
