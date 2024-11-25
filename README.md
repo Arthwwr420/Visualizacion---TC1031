@@ -76,6 +76,6 @@ Se eligieron los algoritmos para su visualizacion y la comparacion del funcionam
 Se eligio tambien añadir el BST para tener una visualizacion del funcionamiento del mismo, además de tener una representacion visual que sirve no solo para el BST en sí, sino que, al compartir hasta cierto punto estructura con otros árboles (como el AVL, por ejemplo), tambien es de ayuda al entender estas otras estructuras de datos.
 
 ### SICT0303 Implementa acciones científicas
-La estructura de arbol binario puede ser consultada al verla representada graficamente en la pantalla, ademas de mostrar el ordenamiento paso a paso de los elementos de acuerdo al arbol, ademas si se da el parametro de tamaño del arreglo con el comando de BST, se busca ese elemento en el arbol y se escribe en Out.txt el nivel en el que se encontro el valor
+La estructura de arbol binario puede ser consultada al verla representada graficamente en la pantalla, ademas de mostrar el ordenamiento paso a paso de los elementos de acuerdo al arbol. si se da el parametro de tamaño del arreglo con el comando de BST, se busca ese elemento en el arbol y se escribe en Out.txt el nivel en el que se encontro el valor
 Para leer datos de archivo, solo hace falta colocar un archivo en el directorio del ejecutable y pasar el nombre de archivo como parametro, estos datos seran los que se ordenarán, mostrando en pantalla el proceso
 Para escribir los datos en un archivo, se toman los datos del archivo de entrada, ya ordenados por el programa, y se escribe en un archivo de nombre "Out.txt"
