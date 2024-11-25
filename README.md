@@ -69,7 +69,7 @@ Cada algoritmo tiene una complejidad distinto:
 - Merge Sort: O(n log n) - Misma complejidad independientemente del caso
 - Bogo Sort: O((n-1)n!) en promedio, mejor caso O(n) y peor caso O(infinito)
 - BST: O(h) (en donde h es la altura) en promedio al buscar, O(n) en el peor caso, y O(1) en el mejor caso. O(h) (donde h es altura) en promedio al insertar, en el peor de los casos O(n) y el mejor O(1) (arbol vacio)
-- Complejidad del Programa: La complejidad del programa varia dependiendo de los parametros de entrada, o el algoritmo que se va a utilizar, la complejidad de las funciones del programa independientes de los algoritmos y el BST no pasa de O(n), por lo que la complejidad del programa, en el programa las funciones tienen comentarios con su respectiva complejidad (en los que solo hay un valor se refiere a que es el mismo para peor caso, mejor y promedio)
+- Complejidad del Programa: La complejidad del programa varia dependiendo de los parametros de entrada, o el algoritmo que se va a utilizar, la complejidad de las funciones del programa independientes de los algoritmos y el BST no pasa de O(n), por lo que la complejidad del programa completo es aquella que pertenezca al algoritmo o procedimiento a realizar, segun se indique al iniciar el programa, en el codigo las funciones tienen comentarios con su respectiva complejidad (en los que solo hay un valor se refiere a que es el mismo para peor caso, mejor y promedio)
 
 ### SICT0302: Toma decisiones
 Se eligieron los algoritmos para su visualizacion y la comparacion del funcionamiento y efectividad de cada uno de manera visual.
