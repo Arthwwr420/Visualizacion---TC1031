@@ -6,7 +6,7 @@
 #include"renderermanager.h"
 
 
-//Encontrar el valor maximo de un array
+//Encontrar el valor maximo de un array, O(n)
 int maxint(int arr[], int size){
     int max = arr[0];
     for(int i = 0; i < size; i++){
@@ -15,14 +15,14 @@ int maxint(int arr[], int size){
     return max;
 }
 
-//cambiar de lugar 2 elementos de un arreglo
+//cambiar de lugar 2 elementos de un arreglo, O(1)
 void swap(int* arr, int i, int j){
     int aux = arr[i];
     arr[i] = arr[j];
     arr[j] = aux;
 }
 
-//checa si el arreglo esta ordenado (usado por bogo)
+//checa si el arreglo esta ordenado (usado por bogo), O(n)
 bool sorted(int arr[], int size){
     for (int i = 1; i < size ; i++){
         if (arr[i - 1] > arr[i]) return false;
@@ -30,7 +30,7 @@ bool sorted(int arr[], int size){
     return true;
 }
 
-//Reordenar aleatoriamente todo el arreglo
+//Reordenar aleatoriamente todo el arreglo, O(n)
 void shuffle(int * arr, int size){
     srand (time(NULL));
     int in = 0;
@@ -42,7 +42,7 @@ void shuffle(int * arr, int size){
     }
 }
 
-// funcion bubble sort
+// funcion bubble sort, O(n^2) en promedio, O(n) en el mejor caso
 bool bubble(int arr[], int size, int H, int W, SDL_Renderer *renderer){
     int max = maxint(arr, size);
     bool running  = true; 
@@ -74,7 +74,7 @@ bool bubble(int arr[], int size, int H, int W, SDL_Renderer *renderer){
 
 }
 
-// funcion shell
+// funcion shell, O(n^2) en promedio, O(n) en el mejor caso
 bool shell(int *arr, int size, int H, int W, SDL_Renderer *renderer){
     bool ordered = false;
 
@@ -117,7 +117,7 @@ bool shell(int *arr, int size, int H, int W, SDL_Renderer *renderer){
     return true;
 }
 
-//funcion selection
+//funcion selection, O(n^2)
 bool selection(int arr[], int size, int H, int W, SDL_Renderer *renderer){
     int minindex = 0;
 
@@ -154,7 +154,7 @@ bool selection(int arr[], int size, int H, int W, SDL_Renderer *renderer){
 	return true;
 }
 
-//funcion Insertion 
+//funcion Insertion O(n^2) en promedio, O(n) en el mejor caso
 bool insertion(int arr[], int size, int H, int W, SDL_Renderer *renderer){
     int curr = 0;
 
@@ -280,7 +280,7 @@ bool merge(int *arr, int start, int mid, int finish, const int &size, const int 
 
 }
 
-//Funcion recursiva Merge Sort
+//Funcion recursiva Merge Sort, O(nlog(n))
 bool mergeSort(int arr[], int size, int strt, int fns, int H, int W, SDL_Renderer *renderer){
     bool running;
 
@@ -301,7 +301,8 @@ bool mergeSort(int arr[], int size, int strt, int fns, int H, int W, SDL_Rendere
 }
 
 
-//WARNING: DO NOT USE WITH A LOT OF ELEMENTS
+//WARNING: DO NOT USE WITH A LOT OF ELEMENTS, 
+//O((n-1)n!) en promedio, mejor caso O(n) y peor caso O(infinito)
 bool BogoSort(int arr[], int size, int H, int W, SDL_Renderer *renderer){
     int max = maxint(arr, size);
     bool running  = true;
@@ -326,7 +327,7 @@ bool BogoSort(int arr[], int size, int H, int W, SDL_Renderer *renderer){
 
 }
 
-//random elements from 1 to 100
+//random elements from 1 to 100 O(n)
 void newArray(int arr[], int size){
     srand (time(NULL));
     for (int i = 0; i < size; i++){
@@ -334,7 +335,7 @@ void newArray(int arr[], int size){
     }
 }
 
-//elementos de 1 a n para un arreglo de tamaño n
+//elementos de 1 a n para un arreglo de tamaño n, O(n)
 void newOrderArray(int arr[], int size){
     for (int i = 0; i < size; i++){
         arr[i] = i+1;

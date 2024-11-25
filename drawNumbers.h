@@ -16,11 +16,13 @@ class numberDrawer{
 
 };
 
+//Complejidad: O(1)
 numberDrawer::numberDrawer(const char *fontname){
     TTF_Init();
     font = TTF_OpenFont(fontname, 100);
 }
 
+//complejidad: O(1)
 void numberDrawer::drawNumber(SDL_Renderer *renderer, int val, SDL_Rect place){
     char const* valchar = std::to_string(val).c_str();
 

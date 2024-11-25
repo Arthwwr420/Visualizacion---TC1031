@@ -20,31 +20,31 @@ struct arginf{
     std::fstream file; //archivo de texto a leer
 };
 
-//Seleccion de algoritmo a usar, segun string
+//Seleccion de algoritmo a usar, segun string, complejidad: O(8)
 int selectSA(std::string ar1){
     
     if (ar1 == "bubble" || ar1 == "0"){
             return 0;
         }
-        else if (ar1 == "shell" || ar1 == "1"){
+    else if (ar1 == "shell" || ar1 == "1"){
             return 1;
         }
-        else if (ar1 == "insertion" || ar1 == "2"){
+    else if (ar1 == "insertion" || ar1 == "2"){
             return 2;
         }
-        else if (ar1 == "selection"|| ar1 == "3"){
+    else if (ar1 == "selection"|| ar1 == "3"){
             return 3;
         }
-        else if (ar1 == "merge"|| ar1 == "4"){
+    else if (ar1 == "merge"|| ar1 == "4"){
             return  4;
         }
-        else if(ar1 == "bogo" || ar1 == "5"){
+    else if(ar1 == "bogo" || ar1 == "5"){
             return 5;
         }
-        else if(ar1 == "bst" || ar1 == "6"){
+    else if(ar1 == "bst" || ar1 == "6"){
             return 6;
         }
-        else{
+    else{
             std::cout << 
             "Entrada no valida, el formato para la ejecucion es \" main + algoritmo + numero de elementos \" \n \
 Los algoritmos son:  (0) Bubble , (1) Shell, (2) Insertion, (3) Selection, (4) Merge, (5) Bogo, (6) BST \n \
@@ -53,7 +53,9 @@ Si estas leyendo de un archivo, recuerda que el nombre del algoritmo va en minus
         }
 }
 
-//regresa parametro como char* (o string) dependiendo del 
+//regresa parametro como char* (o string) dependiendo de la opcion
+//dada por el usuario (ej: -f), complejidad: O(n) (n siendo el num
+//de elementos entre begin y end)
 char* getArgOption(char ** begin, char ** end, const std::string & option)
 {
     char ** itr = std::find(begin, end, option);
@@ -65,6 +67,7 @@ char* getArgOption(char ** begin, char ** end, const std::string & option)
 }
 
 //Analiza los argumentos de la consola y a partir de ellos sobreescribe out con los valores adecuados
+//Complejidad: O(n)  
 void readPar( struct arginf* out, int argc, char** argv){
     int maxelements = 1200;
 
@@ -75,11 +78,13 @@ void readPar( struct arginf* out, int argc, char** argv){
             [](unsigned char c){ return std::tolower(c); });
 
         out->chosenone = selectSA(ar1);
+        if(out->chosenone == 6)
+            out->arrsize = -1;
         
     }
 
     //numero de elementos
-    if (getArgOption(argv, argv + argc, "-n") && out->chosenone != 6){
+    if (getArgOption(argv, argv + argc, "-n")){
         std::string alg;
         switch (out->chosenone)
         {
@@ -100,6 +105,11 @@ void readPar( struct arginf* out, int argc, char** argv){
             break;
         case 5:
             alg = "Bogo";
+            maxelements = 10;
+            break;
+        case 6:
+            alg = "Busqueda Binaria";
+            maxelements = 63;
             break;
         default:
             break;

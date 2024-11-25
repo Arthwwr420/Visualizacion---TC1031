@@ -16,11 +16,13 @@ class numberDrawer{
 
 };
 
+//O(1)
 numberDrawer::numberDrawer(const char *fontname){
     TTF_Init();
     font = TTF_OpenFont(fontname, 100);
 }
 
+//O(1)
 void numberDrawer::drawNumber(SDL_Renderer *renderer, int val, SDL_Rect place){
     char const* valchar = std::to_string(val).c_str();
 
@@ -33,7 +35,7 @@ void numberDrawer::drawNumber(SDL_Renderer *renderer, int val, SDL_Rect place){
 }
 
 
-//Actualizar el renderer para mostrar la imagen adecuada
+//Actualizar el renderer para mostrar la imagen adecuada, O(n)
 void UpdateArrayRender(int* arr, int arrsize, int height, int width, int max, SDL_Renderer *renderer){
     SDL_Rect rRect{0, 0, 0, 0};
     SDL_SetRenderDrawColor(renderer, 0,0,0,255);
@@ -51,6 +53,7 @@ void UpdateArrayRender(int* arr, int arrsize, int height, int width, int max, SD
         }
 }
 
+//O(1)
 void DrawBST(SDL_Renderer *renderer){
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderClear(renderer);
@@ -108,6 +111,7 @@ void DrawBST(SDL_Renderer *renderer){
 
     
 }
+//O(1)
 void BSTDrawAt(SDL_Renderer *renderer, int lvl, int pos, int val, numberDrawer num){
     int starty = 75 + 100*(lvl-1);
     int startx = (1200/(pow(2, lvl-1)))*pos -1200/pow(2, lvl)-18;
@@ -117,7 +121,7 @@ void BSTDrawAt(SDL_Renderer *renderer, int lvl, int pos, int val, numberDrawer n
 
     num.drawNumber(renderer, val, rect);
 }
-
+//O(1)
 void BSTDrawUnder(SDL_Renderer *renderer, int lvl, int pos, int val, numberDrawer num){
     int starty = 75 + 100*(lvl-1);
     int startx = (1200/(pow(2, lvl-1)))*pos -1200/pow(2, lvl)-18;
@@ -127,7 +131,7 @@ void BSTDrawUnder(SDL_Renderer *renderer, int lvl, int pos, int val, numberDrawe
 
     num.drawNumber(renderer, val, rect);
 }
-
+//O(1)
 void BSTEraseUnder(SDL_Renderer *renderer, int lvl, int pos, numberDrawer num){
     int starty = 75 + 100*(lvl-1);
     int startx = (1200/(pow(2, lvl-1)))*pos -1200/pow(2, lvl)-18;
@@ -137,7 +141,7 @@ void BSTEraseUnder(SDL_Renderer *renderer, int lvl, int pos, numberDrawer num){
 
     SDL_RenderFillRect(renderer, &rect);
 }
-
+//O(7)
 void BSTDrawAtPos(SDL_Renderer *renderer, int pos, numberDrawer num){
     int lvl = 0, pospos = 0;
 

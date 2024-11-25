@@ -15,7 +15,7 @@ Al ejecutar el programa desde la consola, se pueden poner otros 3 parametros de 
 main -a (algoritmo) -n (numero de elementos) -f (nombre de archivo)
 
 - -a: Recibe el tipo de algoritmo a utilizar
-- -n: Recibe el numero de elementos a ordenar, debe ser menor al numero maximo de elementos del algoritmo a utilizar
+- -n: Recibe el numero de elementos a ordenar, debe ser menor al numero maximo de elementos del algoritmo a utilizar (si se usa con BST toma el valor como un elemento a buscar en el arbol, escribiendo en Out.txt en que nivel del arbol encontró el valor)
 - -f: Recibe el nombre del archivo a leer (Si se usa junto a los otros parametros de entrada, los valores de los mismos serán sobreescritos)
 
 Cada algoritmo de ordenamiento tiene un numero maximo de elementos que se pueden ordenar. 
@@ -54,6 +54,10 @@ main -f Elementos.txt
 
 - Lee el archivo Elementos.txt, muestra el ordenamiento de los numeros que contiene y escribe los numeros ordenados a Out.txt
 
+main -a BST -n 32
+
+- Muestra el ordenamiento de elementos en un BST, al terminar la animacion busca en el arbol el numero 32 y escribe en Out.txt el nivel en el que encontro el numero.
+
 ## Subcompetencias
 
 ### SICT0301: Evalúa los componentes
@@ -64,12 +68,14 @@ Cada algoritmo tiene una complejidad distinto:
 - Selection Sort: O(n^2) - Misma complejidad independiente del caso
 - Merge Sort: O(n log n) - Misma complejidad independientemente del caso
 - Bogo Sort: O((n-1)n!) en promedio, mejor caso O(n) y peor caso O(infinito)
+- BST: O(h) (en donde h es la altura) en promedio al buscar, O(n) en el peor caso, y O(1) en el mejor caso. O(h) (donde h es altura) en promedio al insertar, en el peor de los casos O(n) y el mejor O(1) (arbol vacio)
+- Complejidad del Programa: La complejidad del programa varia dependiendo de los parametros de entrada, o el algoritmo que se va a utilizar, la complejidad de las funciones del programa independientes de los algoritmos y el BST no pasa de O(n), por lo que la complejidad del programa, en el programa las funciones tienen comentarios con su respectiva complejidad (en los que solo hay un valor se refiere a que es el mismo para peor caso, mejor y promedio)
 
 ### SICT0302: Toma decisiones
 Se eligieron los algoritmos para su visualizacion y la comparacion del funcionamiento y efectividad de cada uno de manera visual.
-Se eligio tambien añadir el BST debido a que es de las estructuras de datos a las que mas le puede ser de utilidad tener una visualizacion clara.
+Se eligio tambien añadir el BST para tener una visualizacion del funcionamiento del mismo, además de tener una representacion visual que sirve no solo para el BST en sí, sino que, al compartir hasta cierto punto estructura con otros árboles (como el AVL, por ejemplo), tambien es de ayuda al entender estas otras estructuras de datos.
 
 ### SICT0303 Implementa acciones científicas
-La estructura de arbol binario puede ser consultada al verla representada graficamente en la pantalla, ademas de mostrar el ordenamiento paso a paso de los elementos de acuerdo al arbol.
+La estructura de arbol binario puede ser consultada al verla representada graficamente en la pantalla, ademas de mostrar el ordenamiento paso a paso de los elementos de acuerdo al arbol, ademas si se da el parametro de tamaño del arreglo con el comando de BST, se busca ese elemento en el arbol y se escribe en Out.txt el nivel en el que se encontro el valor
 Para leer datos de archivo, solo hace falta colocar un archivo en el directorio del ejecutable y pasar el nombre de archivo como parametro, estos datos seran los que se ordenarán, mostrando en pantalla el proceso
 Para escribir los datos en un archivo, se toman los datos del archivo de entrada, ya ordenados por el programa, y se escribe en un archivo de nombre "Out.txt"

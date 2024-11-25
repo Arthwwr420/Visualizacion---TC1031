@@ -15,14 +15,14 @@
 
 const int WIDTH = 1200, HEIGHT = 675;
 
-
+//Complejidad: Depende del algoritmo
 int main(int argc, char* argv[]){
     short unsigned int chosenone = 0;
     unsigned int arrsize = 100;
 
     struct arginf info;
 
-    //read parameters 
+    //read parameters   
     readPar(&info, argc, argv);
 
     arrsize = info.arrsize;
@@ -75,6 +75,8 @@ int main(int argc, char* argv[]){
     SDL_RenderPresent(renderer);
     std::this_thread::sleep_for<int64_t, std::milli>(std::chrono::milliseconds(1000));
 
+    int found = -1; //Solo funciona para buscar un elemento en el BST
+
     //Visualize
     switch (chosenone)
     {
@@ -98,7 +100,7 @@ int main(int argc, char* argv[]){
         running = BogoSort(array, arrsize, HEIGHT, WIDTH, renderer);
         break;
     case 6:
-        running = orderBST(renderer);
+        running = orderBST(renderer, info.arrsize, found);
         break;
     default:
         break;
@@ -126,6 +128,20 @@ int main(int argc, char* argv[]){
 
         for(int i = 0 ; i < arrsize ; i++){
             out << array[i] << "\n";
+        }
+
+        out.close();
+        info.file.close();
+    }
+
+    if (chosenone == 6){
+        std::fstream out;
+        out.open("Out.txt", std::fstream::out);
+        if(found != -1){
+            out << "Dato pedido encontrado en el nivel:\n";
+            out << found;
+        }else{
+            out <<"Dato pedido no encontrado";
         }
 
         out.close();

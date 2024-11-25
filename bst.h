@@ -23,23 +23,23 @@ public:
 	TreeNode(T, int, int, SDL_Renderer*, numberDrawer*);
 	TreeNode(T, TreeNode<T>*, TreeNode<T>*);
 	bool add(T, int= 1, int =1);
-	bool find(T);
+	int find(T, int = 1);
 	void removeChilds();
     void DrawNode(SDL_Renderer*, numberDrawer);
 
 	friend class BST<T>;
 };
 
-template <class T>
+template <class T> //Complejidad: O(1)
 TreeNode<T>::TreeNode(T val, int lev, int ps, SDL_Renderer * ren, numberDrawer *nd) : value(val) , lvl(lev), pos(ps), left(NULL), right(NULL) {
     rend = ren;
     num = nd;
 }
 
-template <class T>
+template <class T> //Complejidad: O(1)
 TreeNode<T>::TreeNode(T val, TreeNode<T> *le, TreeNode<T> *ri) : value(val), left(le), right(ri) {}
 
-template <class T>
+template <class T> //Complejidad O(n) (n siendo altura)
 bool TreeNode<T>::add(T val, int lv , int ps) {
     BSTDrawUnder(rend, lvl, pos, val, *num);
     SDL_RenderPresent(rend);
@@ -77,26 +77,26 @@ bool TreeNode<T>::add(T val, int lv , int ps) {
     return true;
 }
 
-template <class T>
-bool TreeNode<T>::find(T val) {
-	if(val == value) return true;
+template <class T> //Complejidad: O(n) (n siendo altura)
+int TreeNode<T>::find(T val, int lvl) {
+	if(val == value) return lvl;
 	if(right == NULL && left == NULL)
-		return false;
+		return -1;
 	if(val < value){
-		return left->find(val);
+		return left->find(val, lvl +1);
 	}else{
-		return right->find(val);
+		return right->find(val, lvl +1);
 	}
 }
 
-template <class T>
+template <class T> //Complejidad: O(n) (n siendo altura)
 TreeNode<T>* TreeNode<T>::succesor() {
 	if(right == NULL) return this;
 	else return right->succesor();
 }
 
 
-template <class T>
+template <class T> //Complejidad: O(n) 
 void TreeNode<T>::removeChilds() {
 	if(left != NULL){
 		left->removeChilds();
@@ -115,7 +115,7 @@ void TreeNode<T>::removeChilds() {
 	delete [] victim;
 }
 
-template <class T>
+template <class T> //complejidad: O(2)
 void TreeNode<T>::DrawNode(SDL_Renderer *renderer, numberDrawer nd){
     BSTDrawAt(renderer, lvl, pos, value, nd);
     if(left != NULL){
@@ -139,27 +139,27 @@ public:
 	~BST();
 	bool empty() const;
 	bool add(T);
-	bool find(T) const;
+	int find(T) const;
 	void removeAll();
     void Draw(SDL_Renderer*);
     void SetRenderer(SDL_Renderer*);
     void SetNumDrawer(numberDrawer*);
 };
 
-template <class T>
+template <class T> //Complejidad: O(1) 
 BST<T>::BST() : root(0) {}
 
-template <class T>
+template <class T> //Complejidad: O(1) 
 BST<T>::~BST() {
 	removeAll();
 }
 
-template <class T>
+template <class T>//Complejidad: O(1) 
 bool BST<T>::empty() const {
 	return (root == 0);
 }
 
-template<class T>
+template<class T> //Complejidad: O(n) 
 bool BST<T>::add(T val) {
 	if(empty()){
 		TreeNode<T> *newnode = new TreeNode(val, 1, 1, renderer, drawer);
@@ -176,7 +176,7 @@ bool BST<T>::add(T val) {
 }
 
 
-template <class T>
+template <class T> //Complejidad: O(n) 
 void BST<T>::removeAll() {	
 	if(empty()) return;
 	root->removeChilds();
@@ -186,26 +186,28 @@ void BST<T>::removeAll() {
 	delete [] victim;
 }
 
-template <class T>
-bool BST<T>::find(T val) const {
+template <class T> //Complejidad: O(n) 
+int BST<T>::find(T val) const {
 	return root->find(val);
 }
 
-template<class T>
+template<class T> //Complejidad: O(n) 
 void BST<T>::Draw(SDL_Renderer *renderer){
     root->DrawNode(renderer, *drawer);
 }
 
-template<class T>
+template<class T>//Complejidad: O(1) 
 void BST<T>::SetRenderer(SDL_Renderer* rend){
     renderer = rend;
 }
-template<class T>
+template<class T> //Complejidad: O(1) 
 void BST<T>::SetNumDrawer(numberDrawer* nb){
     drawer = nb;
 }
 
-bool orderBST(SDL_Renderer *renderer){
+//Funcion que muestra el BST acomodando elementos en tiempo real, 
+//Complejidad: O(n) 
+bool orderBST(SDL_Renderer *renderer, int element, int& out){ 
     bool runs = true;
     int BSTarray[] = {32, 16, 48, 56, 40, 24, 8, 4, 12, 20, 28, 36, 44, 52, 60, 2, 6, 10, 14, 18, 22, 26, 30, 34, 38, 42, 46, 50, 54, 58, 62, 
         63, 61, 59, 57, 55, 53, 51, 49, 47, 45, 43, 41, 39, 37, 35, 33, 31, 29, 27, 25, 23, 21, 19, 17, 15, 13, 11, 9, 7, 5, 3, 1};
@@ -228,6 +230,10 @@ bool orderBST(SDL_Renderer *renderer){
         std::this_thread::sleep_for<int64_t, std::milli>(std::chrono::milliseconds(1000/35));
         SDL_RenderPresent(renderer);
     }
+
+	if (element != -1)
+		out = tree.find(element);
+		std::cout << out;
 
     tree.Draw(renderer);
 
